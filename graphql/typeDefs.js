@@ -29,6 +29,14 @@ const typeDefs = gql`
         username: String!
         createdAt: String!
     }
+    type Profile{
+        id: ID!
+        username: String
+        dob: String
+        mobile: String
+        pic: String
+        gender: String
+    }
     input RegisterInput{
         username: String!
         password: String!
@@ -38,6 +46,8 @@ const typeDefs = gql`
     type Query{
         getPosts: [Post]
         getPost(postId: ID!): Post
+        getProfiles: [Profile]
+        getProfile(username: String!): Profile
     }
     type Mutation{
         register(registerInput: RegisterInput): User!
@@ -47,6 +57,7 @@ const typeDefs = gql`
         createComment(postId: String!, body: String!): Post!
         deleteComment(postId: ID!, commentId: ID!): Post!
         likePost(postId: ID!): Post!
+        editProfile(profileId: ID!, dob: String, mobile: String, pic: String, gender: String): Profile!
     }
     type Subscription{
         newPost: Post!

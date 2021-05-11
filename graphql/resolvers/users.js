@@ -5,6 +5,7 @@ const {UserInputError} = require('apollo-server')
 const { validateRegisterInput, validateLoginInput } = require('../../util/validator')
 const User = require('../../models/User')
 const { SECRET_KEY } = require('../../config')
+const Profile = require('../../models/Profile')
 
 const generateToken = (user) =>{
     return jwt.sign(
@@ -86,11 +87,23 @@ module.exports = {
 
             const res = await newUser.save();
 
+            const newProfile = new Profile({
+                username,
+                user: res.id,
+                dob: false,
+                mobile: false,
+                pic: false,
+                gender: false
+            })
+
+            const resProfile = await newProfile.save()
+
             const token = generateToken(res);
 
             return {
                 ...res._doc,
                 id: res._id,
+                profileId: resProfile.id,
                 token
             };
         } 
