@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000
 
 const server = new ApolloServer({
     cors: {
-        origin: 'https://nostalgic-jang-da0b04.netlify.app',
+        origin: 'https://nostalgic-jang-da0b04.netlify.app', //'', //https://nostalgic-jang-da0b04.netlify.app
         credentials: true
     },
     typeDefs,
@@ -29,4 +29,5 @@ mongoose.connect(MONGODB, {useNewUrlParser: true, useUnifiedTopology: true})
     })
     .catch(err => {
         console.error.length(err)
+        console.log("Unable to connect to database")
     })
