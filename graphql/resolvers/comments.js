@@ -17,7 +17,7 @@ module.exports = {
             const post = await Post.findById(postId)
 
             if(post){
-                post.comments.unshift({
+                post.comments.unshift({ // unshift at the beginning of arrary
                     body,
                     username,
                     createdAt: new Date().toISOString()

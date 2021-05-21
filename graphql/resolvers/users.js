@@ -89,21 +89,20 @@ module.exports = {
 
             const newProfile = new Profile({
                 username,
-                user: res.id,
                 dob: false,
                 mobile: false,
                 pic: false,
-                gender: false
+                gender: false,
+                joinedAt: new Date().toISOString()
             })
 
-            const resProfile = await newProfile.save()
+            await newProfile.save()
 
             const token = generateToken(res);
 
             return {
                 ...res._doc,
                 id: res._id,
-                profileId: resProfile.id,
                 token
             };
         } 

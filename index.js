@@ -9,10 +9,11 @@ const {MONGODB} = require('./config.js')
 const pubsub = new PubSub()
 
 const PORT = process.env.PORT || 5000
+// const MONGODB = process.env.MONGODB
 
 const server = new ApolloServer({
     cors: {
-        origin: 'https://nostalgic-jang-da0b04.netlify.app',
+        origin: 'https://nostalgic-jang-da0b04.netlify.app', // '*', //
         credentials: true
     },
     typeDefs,

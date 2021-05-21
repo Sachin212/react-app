@@ -16,7 +16,8 @@ module.exports = {
         },
         async getProfile(_, { username }){
             try{
-                const profile = await Profile.findOne({ username })
+                const profile = await Profile.findOne({ username: username })
+                
                 if(profile){
                     return profile
                 }else{
@@ -28,17 +29,12 @@ module.exports = {
         }
     },
     Mutation: {
-        async editProfile(_, {profileId, dob, mobile, pic, gender }, context){
+        async editProfile(_, { dob, mobile, pic, gender }, context){
             const { username } = checkAuth(context)
 
-            console.log(dob, mobile, pic, gender)
-
             try{
-                const update = {
-                            dob:false,
-                            mobile:false,
-                            pic:false,
-                            gender:false};
+                // const user = User.find()
+                const update = {}
                 const filter = {username}
 
                 if(dob) update.dob = dob

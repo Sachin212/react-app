@@ -14,11 +14,24 @@ module.exports = {
         },
         async getPost(_, {postId}){
             try{
+                
                 const post = await Post.findById(postId)
                 if(post){
                     return post
                 }else{
                     throw new Error('Post not found')
+                }
+            }catch(err){
+                throw new Error(err)
+            }
+        },
+        async getUserPost(_, {username}){
+            try{
+                const posts = await Post.find({username: username}).sort({ createdAt: -1 })
+                if(posts){
+                    return posts
+                }else{
+                    throw new Error('No Post')
                 }
             }catch(err){
                 throw new Error(err)
@@ -71,7 +84,7 @@ module.exports = {
                     // Post already liked, unlike it
                     post.likes = post.likes.filter(like => like.username !== username)
                 }else{
-                    // Not liked =, like post
+                    // Post Not liked like it
                     post.likes.push({
                         username,
                         createdAt: new Date().toISOString()

@@ -6,8 +6,19 @@ const profileSchema = new Schema({
         mobile: String,
         pic: String,
         gender: String,
+        following: [
+                {
+                hide: Boolean,
+                username: String
+                }
+        ],
+        followedBy: [
+                {
+                hide: Boolean,
+                username: String
+                }
+        ],
         joinedAt: String
-        
 })
 
 module.exports = model('Profile', profileSchema)
